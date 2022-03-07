@@ -1,5 +1,16 @@
 const mongoose = require('mongoose');
 
+const pointSchema = new mongoose.Schema({
+  type: {
+    type: String,
+    enum: ['Point'],
+    required: true,
+  },
+  coordinates: {
+    type: [Number],
+    required: true,
+  },
+});
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -33,12 +44,14 @@ const userSchema = new mongoose.Schema({
     require: true,
   },
   bornAt: {
-      type: Date,
-      require: true,
+    type: Date,
+    require: true,
   },
   location: {
-    type: Geolocation,
-    require: true,
+    name: String,
+    type: pointSchema,
+    required: true,
+    index: '2dsphere',
   },
   about: {
     type: String,
