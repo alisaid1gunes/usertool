@@ -8,4 +8,6 @@ router.post('/register', upload.single('profile'), authController.register);
 
 router.post('/login', authController.login);
 
+router.post('/logout', authController.logout);
+
 module.exports = router;
