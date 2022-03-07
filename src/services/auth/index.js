@@ -1,3 +1,5 @@
 const Register = require('./Register');
 
-module.exports = { Register };
+const Login = require('./Login');
+
+module.exports = { Register, Login };
