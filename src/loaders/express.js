@@ -6,6 +6,10 @@ const compression = require('compression');
 
 const cors = require('cors');
 
+const apiErrorHandler = require('../middlewares');
+
+const { auth } = require('../routers');
+
 module.exports = (app) => {
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
@@ -14,7 +18,7 @@ module.exports = (app) => {
 
   app.use(cors());
 
-  app.use('/', (req, res) => {
-    res.send('hello world!');
-  });
+  app.use('/api', auth);
+
+  app.use(apiErrorHandler);
 };
