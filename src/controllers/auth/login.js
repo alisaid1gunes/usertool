@@ -23,7 +23,7 @@ const login = async (req, res, next) => {
     }
     next(ApiErrorService.unauthorized(result.error));
   } catch (err) {
-    next(ApiErrorService.unauthorized(`User did not log in.${err}`));
+    next(ApiErrorService.unauthorized(`User could not log in.${err}`));
   }
 };
 
