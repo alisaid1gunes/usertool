@@ -7,7 +7,7 @@ class GetAll {
     this.mongooseTask = new MongooseService(User);
   }
 
-  async GetUser(userId) {
+  async GetUser() {
     try {
       const result = await this.mongooseTask.getAll();
 
