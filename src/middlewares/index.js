@@ -1,3 +1,5 @@
 const apiErrorHandler = require('../middlewares/apiErrorHandler');
 
-module.exports = apiErrorHandler;
+const verifyToken = require('../middlewares/verifyToken');
+
+module.exports = {apiErrorHandler, verifyToken};

@@ -6,7 +6,7 @@ const compression = require('compression');
 
 const cors = require('cors');
 
-const apiErrorHandler = require('../middlewares');
+const { apiErrorHandler } = require('../middlewares');
 
 const { auth } = require('../routers');
 
