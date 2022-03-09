@@ -4,4 +4,6 @@ const GetAll = require('./GetAll');
 
 const Update = require('./Update');
 
-module.exports = { Get, GetAll, Update };
+const Remove = require('./Remove');
+
+module.exports = { Get, GetAll, Update, Remove };
