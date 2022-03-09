@@ -4,4 +4,4 @@ const GetAll = require('./GetAll');
 
 const Update = require('./Update');
 
-module.exports = { Get, GetAll };
+module.exports = { Get, GetAll, Update };
