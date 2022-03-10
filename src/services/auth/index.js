@@ -4,4 +4,6 @@ const Login = require('./Login');
 
 const Logout = require('./Logout');
 
-module.exports = { Register, Login, Logout };
+const Refresh = require('./Refresh');
+
+module.exports = { Register, Login, Logout, Refresh };

@@ -40,4 +40,4 @@ class Register {
   }
 }
 
-module.exports = { Register, registerEmitter };
+module.exports =  Register ;
