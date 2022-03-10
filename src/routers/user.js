@@ -8,6 +8,8 @@ const { uploadProfile } = require('../utils');
 
 router.get('/profile', verify, userController.getProfilePic);
 
+router.get('/', verify, userController.getAll);
+
 router.get('/:id', verify, userController.get);
 
 router.delete('/:id', verify, userController.remove);

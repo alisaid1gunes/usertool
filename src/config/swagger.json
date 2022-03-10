@@ -1,0 +1,511 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a documentation for User Tool server.",
+    "version": "1.0.0",
+    "title": "User Tool",
+    "contact": {
+      "email": "alisaidgunes1@gmail.com"
+    }
+  },
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "auth",
+      "description": "Operations about authentication"
+    },
+    {
+      "name": "users",
+      "description": "Operations about user"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/users/auth/register": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "register a user",
+        "operationId": "registerUser",
+        "consumes": [
+          "multipart/form-data",
+          "application/json"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "email",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "password",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "image",
+            "description": "it must be png or jpg and less than 5mb",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "in": "formData",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "surname",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "age",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "bornAt",
+            "required": true,
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "in": "formData",
+            "name": "location",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "about",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "balance",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "phoneNumber",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid user supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/users/auth/login": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "login as a user",
+        "operationId": "loginUser",
+        "consumes": [
+          "multipart/form-data",
+          "application/json"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "email",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "password",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid user supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/users/auth/logout": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "logout as a user",
+        "operationId": "logoutUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "refreshToken",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "refreshToken": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid refreshToken supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/users/auth/token": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "To get a new refreshToken",
+        "operationId": "tokenUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "refreshToken",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "refreshToken": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid refreshToken supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/users/profile": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get user profile picture by url(it must be in body)",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "getUserProfilePictureByUrl",
+        "produces": [
+          "application/image"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "url",
+            "description": "to get user's profile picture.",
+            "schema": {
+              "type": "object",
+              "required": [
+                "url"
+              ],
+              "properties": {
+                "profileUrl": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Logo image in PNG format",
+            "schema": {
+              "type": "file"
+            }
+          }
+        },
+        "security": [
+          {
+            "usertool_auth": []
+          }
+        ]
+      }
+    },
+    "/user": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get all users",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "getAllUsers",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid id supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        },
+        "security": [
+          {
+            "usertool_auth": []
+          }
+        ]
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get user by user id",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "getUserById",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid id supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        },
+        "security": [
+          {
+            "usertool_auth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Updated user",
+        "operationId": "updateUser",
+        "description": "This can only be done by the logged in user.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id that need to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "username",
+            "description": "new username",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "profile",
+            "description": "it must be png or jpg and less than 5mb",
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid user supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        },
+        "security": [
+          {
+            "usertool_auth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Delete user",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "deleteUser",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The name that needs to be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        },
+        "security": [
+          {
+            "usertool_auth": []
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "usertool_auth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "auth-token"
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "required": [
+        "username",
+        "email",
+        "profileUrl"
+      ],
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "surname": {
+          "type": "string"
+        },
+        "age": {
+          "type": "integer"
+        },
+        "bornAt": {
+          "type": "string",
+          "format": "date"
+        },
+        "balance": {
+          "type": "integer"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "about": {
+          "type": "string"
+        },
+        "location": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    }
+  }
+}
