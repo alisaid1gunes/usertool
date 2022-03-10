@@ -4,7 +4,7 @@ const userController = require('../controllers/user');
 
 const verify = require('../middlewares/verifyToken');
 
-const { uploadProfile } = require('../utils/uploadProfile');
+const { uploadProfile } = require('../utils');
 
 router.get('/profile', verify, userController.getProfilePic);
 
