@@ -24,11 +24,7 @@ const update = (data) => {
     surname: Joi.string(),
     age: Joi.number(),
     bornAt: Joi.date(),
-    location: Joi.object({
-      type: pointSchema,
-      name: Joi.string(),
-      coordinates: Joi.array(),
-    }),
+    location:  location: Joi.array().items(Joi.number()),
     about: Joi.string(),
     balance: Joi.number(),
     phoneNumber: Joi.string(),
