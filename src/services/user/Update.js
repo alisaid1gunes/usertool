@@ -4,6 +4,8 @@ const { promisify } = require('util');
 
 const { User } = require('../../models');
 
+const { updateValidation, idValidation } = require('../../validations/user');
+
 const MongooseService = require('../Mongoose');
 
 class Update {
@@ -15,6 +17,13 @@ class Update {
     const { body } = req;
 
     const { file } = req;
+
+    const { idError } = idValidation(id);
+    if (idError) return { success: false, error: idError.details[0].message };
+
+    const { updateError } = updateValidation(body);
+    if (updateError)
+      return { success: false, error: updateError.details[0].message };
 
     if (file) {
       const fileUrl = req.file.path.replace(/\\/g, '/');
