@@ -1,7 +1,14 @@
-const register = require('./register');
+const loginValidation = require('./login');
 
-const login = require('./login');
+const registerValidation = require('./register');
 
-const logout = require('./logout');
+const logoutValidation = require('./logout');
 
-module.exports = { register, login, logout };
+const refreshvalidation = require('./refresh');
+
+module.exports = {
+  registerValidation,
+  loginValidation,
+  logoutValidation,
+  refreshvalidation,
+};
