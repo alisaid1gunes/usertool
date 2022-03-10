@@ -7,4 +7,5 @@ const updateValidation = require('./updateValidation');
 module.exports = {
   getValidation,
   getAllValidation,
+  updateValidation,
 };
