@@ -24,7 +24,7 @@ const update = (data) => {
     surname: Joi.string(),
     age: Joi.number(),
     bornAt: Joi.date(),
-    location:  location: Joi.array().items(Joi.number()),
+    location: Joi.array().items(Joi.number()),
     about: Joi.string(),
     balance: Joi.number(),
     phoneNumber: Joi.string(),

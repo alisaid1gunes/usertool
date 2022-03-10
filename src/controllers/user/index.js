@@ -8,4 +8,4 @@ const remove = require('./remove');
 
 const getProfilePic = require('./getProfilePic');
 
-module.exports = { get, getAll, update, getProfilePic };
+module.exports = { get, getAll, update, remove, getProfilePic };

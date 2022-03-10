@@ -8,7 +8,7 @@ const cors = require('cors');
 
 const { apiErrorHandler } = require('../middlewares');
 
-const { auth, user } = require('../routers');
+const { auth, user } = require('../routes');
 
 const { swaggerUi, swaggerDocument } = require('./swagger');
 
