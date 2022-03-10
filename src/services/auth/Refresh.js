@@ -8,6 +8,7 @@ const MongooseService = require('../Mongoose');
 
 const { generateToken } = require('../../utils/tokenGenerator');
 
+const { refreshValidation } = require('../../validations/auth');
 class Refresh {
   constructor() {
     this.mongooseUser = new MongooseService(User);
@@ -16,6 +17,9 @@ class Refresh {
 
   async Refresh(body) {
     const bodyIn = body;
+
+    const { error } = refreshValidation(bodyIn);
+    if (error) return { success: false, error: error.details[0].message };
 
     const refreshToken = await this.mongooseRefreshToken.get({
       token: bodyIn.refreshToken,

@@ -4,6 +4,7 @@ const { User, RefreshToken } = require('../../models');
 
 const MongooseService = require('../Mongoose');
 
+const { logoutValidation } = require('../../validations/auth');
 class Logout {
   constructor() {
     this.mongooseUser = new MongooseService(User);
@@ -12,6 +13,9 @@ class Logout {
 
   async LogoutUser(body) {
     const bodyIn = body;
+
+    const { error } = logoutValidation(bodyIn);
+    if (error) return { success: false, error: error.details[0].message };
 
     const { refreshToken } = bodyIn;
 

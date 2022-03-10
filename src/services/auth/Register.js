@@ -5,6 +5,7 @@ const { User } = require('../../models');
 
 const MongooseService = require('../Mongoose');
 
+const { registerValidation } = require('../../validations/auth');
 class Register {
   constructor() {
     this.mongooseUser = new MongooseService(User);
@@ -13,6 +14,9 @@ class Register {
   async RegisterUser(req) {
     const bodyIn = req.body;
     const { file } = req;
+
+    const { error } = registerValidation(bodyIn);
+    if (error) return { success: false, error: error.details[0].message };
 
     if (!file)
       return {

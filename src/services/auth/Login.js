@@ -10,6 +10,7 @@ const { generateToken } = require('../../utils');
 
 const { RefreshToken } = require('../../models');
 
+const { loginValidation } = require('../../validations/auth');
 class Login {
   constructor() {
     this.mongooseUser = new MongooseService(User);
@@ -18,7 +19,8 @@ class Login {
 
   async LoginUser(body) {
     try {
-      if (error) return { error: error.details[0].message, success: false };
+      const { error } = loginValidation(body);
+      if (error) return { success: false, error: error.details[0].message };
 
       const user = await this.mongooseUser.get({ email: body.email });
 
