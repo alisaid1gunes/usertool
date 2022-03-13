@@ -6,7 +6,7 @@ const verify = require('../middlewares/verifyToken');
 
 const { uploadProfile } = require('../utils');
 
-router.get('/profile', verify, userController.getProfilePic);
+router.post('/profile', verify, userController.getProfilePic);
 
 router.get('/', verify, userController.getAll);
 
@@ -17,7 +17,7 @@ router.delete('/:id', verify, userController.remove);
 router.put(
   '/:id',
   verify,
-  uploadProfile.single('profile'),
+  uploadProfile.single('image'),
   userController.update
 );
 

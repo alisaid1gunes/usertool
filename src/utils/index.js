@@ -1,5 +1,5 @@
-const tokenGenerator = require('./tokenGenerator');
+const generateToken = require('./generateToken');
 
 const uploadProfile = require('./uploadProfile');
 
-module.exports = { tokenGenerator, uploadProfile };
+module.exports = { generateToken, uploadProfile };

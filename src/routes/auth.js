@@ -6,7 +6,7 @@ const authController = require('../controllers/auth');
 
 router.post(
   '/register',
-  uploadProfile.single('profile'),
+  uploadProfile.single('image'),
   authController.register
 );
 

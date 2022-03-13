@@ -15,11 +15,11 @@ class Get {
     try {
       const result = await this.mongooseUser.get({ _id: id });
 
-      if (result) return { result, success: true };
+      if (result) return { result, success: true , message: 'User successfully fetched'};
 
-      return { success: false, error: 'User could not find' };
+      return { success: false, message: 'User could not find' };
     } catch (err) {
-      return { success: false, error: `User could not find. Error:${err}` };
+      return { success: false, message: `User could not find. Error:${err}` };
     }
   }
 }

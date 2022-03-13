@@ -20,18 +20,16 @@ class Login {
   async LoginUser(body) {
     try {
       const { error } = loginValidation(body);
-      if (error) return { success: false, error: error.details[0].message };
+      if (error) return { success: false, message: error.details[0].message };
 
       const user = await this.mongooseUser.get({ email: body.email });
 
-      if (!user) return { error: 'email or password is wrong', success: false };
+      if (!user)
+        return { message: 'email or password is wrong', success: false };
 
       const validPass = await bcrypt.compare(body.password, user.password);
 
-      if (!validPass) return { error: 'Invalid password', success: false };
-
-      if (!user.activation.isActivated)
-        return { error: 'User is not activated', success: false };
+      if (!validPass) return { message: 'Invalid password', success: false };
 
       const accessToken = generateToken(
         user._id,
@@ -50,9 +48,15 @@ class Login {
       });
       const savedToken = await this.mongooseRefreshToken.save(refreshTokenDb);
 
-      return { accessToken, refreshToken: savedToken.token, success: true };
+      return {
+        username: user.username,
+        accessToken,
+        refreshToken: savedToken.token,
+        success: true,
+        message: 'User successfully logged in',
+      };
     } catch (err) {
-      return { error: err, success: false };
+      return { message: err, success: false };
     }
   }
 }

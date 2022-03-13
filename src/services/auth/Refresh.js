@@ -6,7 +6,7 @@ const { User, RefreshToken } = require('../../models');
 
 const MongooseService = require('../Mongoose');
 
-const { generateToken } = require('../../utils/tokenGenerator');
+const { generateToken } = require('../../utils/generateToken');
 
 const { refreshValidation } = require('../../validations/auth');
 class Refresh {
@@ -19,14 +19,14 @@ class Refresh {
     const bodyIn = body;
 
     const { error } = refreshValidation(bodyIn);
-    if (error) return { success: false, error: error.details[0].message };
+    if (error) return { success: false, message: error.details[0].message };
 
     const refreshToken = await this.mongooseRefreshToken.get({
       token: bodyIn.refreshToken,
     });
 
     if (!refreshToken)
-      return { success: false, error: 'refresh token could not find' };
+      return { success: false, message: 'refresh token could not find' };
 
     const userId = jwt.verify(
       refreshToken.token,
@@ -38,7 +38,7 @@ class Refresh {
       process.env.ACCESS_TOKEN_SECRET,
       '15d'
     );
-    return { accessToken, success: true };
+    return { accessToken, success: true, message: 'refresh token successfuly created' };
   }
 }
 

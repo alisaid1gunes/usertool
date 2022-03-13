@@ -4,8 +4,9 @@ const ApiErrorService = require('../../services/ApiError');
 
 // eslint-disable-next-line consistent-return
 const getProfilePic = async (req, res, next) => {
+  console.log(req.body);
   try {
-    return res.status(StatusCodes.OK).sendFile(req.body.url, { root: './' });
+    return res.status(StatusCodes.OK).sendFile(req.body.image, { root: './' });
   } catch (err) {
     next(
       ApiErrorService.notFound(

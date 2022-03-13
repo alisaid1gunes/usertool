@@ -13,7 +13,7 @@ const refresh = async (req, res, next) => {
 
     if (result.success) return res.status(StatusCodes.OK).send(result);
 
-    next(ApiErrorService.badRequest(result.error));
+    next(ApiErrorService.badRequest(result.message));
   } catch (err) {
     next(
       ApiErrorService.badRequest('Token could not refresh. Request is wrong')

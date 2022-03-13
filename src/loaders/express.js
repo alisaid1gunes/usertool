@@ -22,7 +22,7 @@ module.exports = (app) => {
 
   app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-  app.use('/api', auth);
+  app.use('/api/users/auth', auth);
 
   app.use('/api/users', user);
 

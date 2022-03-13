@@ -17,7 +17,7 @@ class Remove {
 
   async RemoveUser(id) {
     const { error } = removeValidation(id);
-    if (error) return { success: false, error: error.details[0].message };
+    if (error) return { success: false, message: error.details[0].message };
     
     const user = await this.mongooseUser.get({ _id: id });
 
@@ -27,7 +27,7 @@ class Remove {
       await this.mongooseUser.delete({ _id: id });
       return { message: 'User removed', success: true };
     } catch (err) {
-      return { success: false, error: `User could not remove. Error:${err}` };
+      return { success: false, message: `User could not remove. Error:${err}` };
     }
   }
 }

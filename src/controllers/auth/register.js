@@ -13,7 +13,7 @@ const register = async (req, res, next) => {
 
     if (result.success) return res.status(StatusCodes.CREATED).send(result);
 
-    next(ApiErrorService.badRequest(result.error));
+    next(ApiErrorService.badRequest(result.message));
   } catch (err) {
     next(
       ApiErrorService.badRequest(

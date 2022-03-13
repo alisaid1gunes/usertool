@@ -12,16 +12,18 @@ const login = async (req, res, next) => {
     const result = await LoginService.LoginUser(req.body);
 
     if (result.success) {
-      const { accessToken } = result;
-      const { refreshToken } = result;
-      return res.header('auth-token', accessToken).status(StatusCodes.OK).send({
-        accessToken,
-        refreshToken,
-        error: result.error,
-        succes: result.success,
-      });
+      return res
+        .header('auth-token', result.accessToken)
+        .status(StatusCodes.OK)
+        .send({
+          username: result.username,
+          accessToken: result.accessToken,
+          refreshToken: result.refreshToken,
+          success: result.success,
+          message: result.message,
+        });
     }
-    next(ApiErrorService.unauthorized(result.error));
+    next(ApiErrorService.unauthorized(result.message));
   } catch (err) {
     next(ApiErrorService.unauthorized(`User could not log in.${err}`));
   }

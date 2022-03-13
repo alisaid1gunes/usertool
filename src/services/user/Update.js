@@ -19,11 +19,11 @@ class Update {
     const { file } = req;
 
     const { idError } = idValidation(id);
-    if (idError) return { success: false, error: idError.details[0].message };
+    if (idError) return { success: false, message: idError.details[0].message };
 
     const { updateError } = updateValidation(body);
     if (updateError)
-      return { success: false, error: updateError.details[0].message };
+      return { success: false, message: updateError.details[0].message };
 
     if (file) {
       const fileUrl = req.file.path.replace(/\\/g, '/');
@@ -37,10 +37,10 @@ class Update {
     try {
       const result = await this.mongooseUser.update(id, body);
 
-      if (result) return { result, success: true };
-      return { success: false, error: 'Could not update.' };
+      if (result) return { result, success: true, message: 'User successfully updated' };
+      return { success: false, message: 'Could not update.' };
     } catch (err) {
-      return { success: false, error: `Could not update. Error:${err}` };
+      return { success: false, message: `Could not update. Error:${err}` };
     }
   }
 }

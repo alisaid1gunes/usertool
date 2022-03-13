@@ -16,17 +16,17 @@ class Register {
     const { file } = req;
 
     const { error } = registerValidation(bodyIn);
-    if (error) return { success: false, error: error.details[0].message };
+    if (error) return { success: false, message: error.details[0].message };
 
     if (!file)
       return {
-        error: ' File type must be jpg or png and file size must less than 5MB',
+        message: ' File type must be jpg or png and file size must less than 5MB',
         success: false,
       };
 
     const emailExist = await this.mongooseUser.get({ email: bodyIn.email });
 
-    if (emailExist) return { error: 'email already exists', success: false };
+    if (emailExist) return { message: 'email already exists', success: false };
 
     const salt = await bcrypt.genSalt(10);
     bodyIn.password = await bcrypt.hash(bodyIn.password, salt);
@@ -37,11 +37,11 @@ class Register {
 
     try {
       const user = await this.mongooseUser.save(bodyIn);
-      return { success: true, user };
+      return { success: true, user , message: 'User successfully registered' };
     } catch (err) {
-      return { success: false, error: err };
+      return { success: false, message: err };
     }
   }
 }
 
-module.exports =  Register ;
+module.exports = Register;

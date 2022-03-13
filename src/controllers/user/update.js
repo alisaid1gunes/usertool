@@ -12,7 +12,7 @@ const update = async (req, res, next) => {
     const result = await UserService.UpdateUser(req, id);
     if (result.success) return res.status(StatusCodes.OK).json(result);
 
-    next(ApiErrorService.badRequest(result.error));
+    next(ApiErrorService.badRequest(result.message));
   } catch (err) {
     next(
       ApiErrorService.badRequest(

@@ -10,7 +10,7 @@ const get = async (req, res, next) => {
   try {
     const result = await UserService.GetUser(req.params.id);
     if (result.success) return res.status(StatusCodes.OK).json(result);
-    next(ApiErrorService.notFound(result.error));
+    next(ApiErrorService.notFound(result.message));
   } catch (err) {
     next(
       ApiErrorService.notFound(
